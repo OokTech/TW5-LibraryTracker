@@ -1,0 +1,471 @@
+caption: Manage Books
+title: $:/plugins/inmysocks/LibraryTracker/Manage Books
+
+\define thisMakeSelectedValue()
+$(sortType)$[$(SelectedType)$]
+\end
+
+\define count1()
+<$count filter='[tag[Book]$(SelectedFilterPart)$sort[$(sortType)$]regexp:$(searchField)$[(?i)$(thisSearch)$]]'/>
+\end
+
+\define count2()
+<$count filter='[tag[Book]sort[$(sortType)$]regexp:$(searchField)$[(?i)$(thisSearch)$]]'/>
+\end
+
+\define thisSetType()
+<$reveal type='nomatch' state="""$:/state/Library Tracker/$(CurrentBook)$""" text='edit'>
+	<$button class='tc-btn-invisible' set="""$:/state/Library Tracker/$(CurrentBook)$""" setTo='edit'>
+		<$view tiddler="""$(CurrentBook)$""" field=item_type/>
+	</$button>
+</$reveal>
+<$reveal type='match' state="""$:/state/Library Tracker/$(CurrentBook)$""" text='edit'>
+	<$button class='tc-btn-invisible' set="""$:/state/Library Tracker/$(CurrentBook)$""" setTo='noedit'>
+		{{$:/core/images/done-button}}
+	</$button>
+	<$select tiddler="""$(CurrentBook)$""" field='item_type'>
+		<$list filter='[[$:/data/BookTypes]indexes[]]'>
+			<option>
+				<<currentTiddler>>
+			</option>
+		</$list>
+	</$select>
+</$reveal>
+\end
+
+\define thisSetAuthor()
+<$reveal type='nomatch' state="""$:/state/Library Tracker/$(CurrentBook)$""" text='edit'>
+	<$button class='tc-btn-invisible' set="""$:/state/Library Tracker/$(CurrentBook)$""" setTo='edit'>
+		<$view tiddler="""$(CurrentBook)$""" field=author/>
+	</$button>
+</$reveal>
+<$reveal type='match' state="""$:/state/Library Tracker/$(CurrentBook)$""" text='edit'>
+	<$button class='tc-btn-invisible' set="""$:/state/Library Tracker/$(CurrentBook)$""" setTo='noedit'>
+		{{$:/core/images/done-button}}
+	</$button>
+	<$select tiddler="""$(CurrentBook)$""" field='author'>
+		<$list filter='[[$:/data/BookAuthors]indexes[]]'>
+			<option>
+				<<currentTiddler>>
+			</option>
+		</$list>
+	</$select>
+</$reveal>
+\end
+
+\define thisSetLocation()
+<$reveal type='nomatch' state="""$:/state/Library Tracker/$(CurrentBook)$""" text='edit'>
+	<$button class='tc-btn-invisible' set="""$:/state/Library Tracker/$(CurrentBook)$""" setTo='edit'>
+		<$view tiddler="""$(CurrentBook)$""" field=location/>
+	</$button>
+</$reveal>
+<$reveal type='match' state="""$:/state/Library Tracker/$(CurrentBook)$""" text='edit'>
+	<$button class='tc-btn-invisible' set="""$:/state/Library Tracker/$(CurrentBook)$""" setTo='noedit'>
+		{{$:/core/images/done-button}}
+	</$button>
+	<$select tiddler="""$(CurrentBook)$""" field='location'>
+		<$list filter='[[$:/data/BookLocations]indexes[]]'>
+			<option>
+				<<currentTiddler>>
+			</option>
+		</$list>
+	</$select>
+</$reveal>
+\end
+
+\define thisSetOwner()
+<$reveal type='nomatch' state="""$:/state/Library Tracker/$(CurrentBook)$""" text='edit'>
+	<$button class='tc-btn-invisible' set="""$:/state/Library Tracker/$(CurrentBook)$""" setTo='edit'>
+		<$view tiddler="""$(CurrentBook)$""" field=owner/>
+	</$button>
+</$reveal>
+<$reveal type='match' state="""$:/state/Library Tracker/$(CurrentBook)$""" text='edit'>
+	<$button class='tc-btn-invisible' set="""$:/state/Library Tracker/$(CurrentBook)$""" setTo='noedit'>
+		{{$:/core/images/done-button}}
+	</$button>
+	<$select tiddler="""$(CurrentBook)$""" field='owner'>
+		<$list filter='[[$:/data/BookOwners]indexes[]]'>
+			<option>
+				<<currentTiddler>>
+			</option>
+		</$list>
+	</$select>
+</$reveal>
+\end
+
+\define thisSetSeries()
+<$reveal type='nomatch' state="""$:/state/Library Tracker/$(CurrentBook)$""" text='edit'>
+	<$button class='tc-btn-invisible' set="""$:/state/Library Tracker/$(CurrentBook)$""" setTo='edit'>
+		<$view tiddler="""$(CurrentBook)$""" field=series/>
+	</$button>
+</$reveal>
+<$reveal type='match' state="""$:/state/Library Tracker/$(CurrentBook)$""" text='edit'>
+	<$button class='tc-btn-invisible' set="""$:/state/Library Tracker/$(CurrentBook)$""" setTo='noedit'>
+		{{$:/core/images/done-button}}
+	</$button>
+	<$select tiddler="""$(CurrentBook)$""" field='series'>
+		<$list filter='[[$:/data/SeriesTitles]indexes[]]'>
+			<option>
+				<<currentTiddler>>
+			</option>
+		</$list>
+	</$select>
+</$reveal>
+\end
+
+\define thisSetGenre()
+<$reveal type='nomatch' state="""$:/state/Library Tracker/$(CurrentBook)$""" text='edit'>
+	<$button class='tc-btn-invisible' set="""$:/state/Library Tracker/$(CurrentBook)$""" setTo='edit'>
+		<$view tiddler="""$(CurrentBook)$""" field=genre/>
+	</$button>
+</$reveal>
+<$reveal type='match' state="""$:/state/Library Tracker/$(CurrentBook)$""" text='edit'>
+	<$button class='tc-btn-invisible' set="""$:/state/Library Tracker/$(CurrentBook)$""" setTo='noedit'>
+		{{$:/core/images/done-button}}
+	</$button>
+	<$select tiddler="""$(CurrentBook)$""" field='genre'>
+		<$list filter='[[$:/data/BookGenres]indexes[]]'>
+			<option>
+				<<currentTiddler>>
+			</option>
+		</$list>
+	</$select>
+</$reveal>
+\end
+
+\define thisEditISBN()
+<$reveal type='nomatch' state="""$:/state/Library Tracker/$(CurrentBook)$""" text='edit'>
+	<$button class='tc-btn-invisible' set="""$:/state/Library Tracker/$(CurrentBook)$""" setTo='edit'>
+		<$view tiddler="""$(CurrentBook)$""" field=isbn/>
+	</$button>
+</$reveal>
+<$reveal type='match' state="""$:/state/Library Tracker/$(CurrentBook)$""" text='edit'>
+	<$button class='tc-btn-invisible' set="""$:/state/Library Tracker/$(CurrentBook)$""" setTo='noedit'>
+		{{$:/core/images/done-button}}
+	</$button>
+	<$edit-text tiddler="""$(CurrentBook)$""" field='isbn'/>
+</$reveal>
+\end
+
+\define thisEditCustomField()
+<$reveal type='nomatch' state="""$:/state/Library Tracker/$(CurrentBook)$""" text='edit'>
+	<$button class='tc-btn-invisible' set="""$:/state/Library Tracker/$(CurrentBook)$""" setTo='edit'>
+		<$view tiddler="""$(CurrentBook)$""" field={{!!field_name}}/>
+	</$button>
+</$reveal>
+<$reveal type='match' state="""$:/state/Library Tracker/$(CurrentBook)$""" text='edit'>
+	<$button class='tc-btn-invisible' set="""$:/state/Library Tracker/$(CurrentBook)$""" setTo='noedit'>
+		{{$:/core/images/done-button}}
+	</$button>
+	<$edit-text tiddler="""$(CurrentBook)$""" field={{!!field_name}}/>
+</$reveal>
+\end
+
+\define thisInnerBookList()
+<tr>
+	<td>
+		<$link to=<<CurrentBook>>>
+			<$view tiddler=<<CurrentBook>> field='title'/>
+		</$link>
+	</td>
+	<$reveal type='nomatch' state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_type' text=false tag=td>
+		<<thisSetType>>
+	</$reveal>
+	<$reveal type='nomatch' state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_author' text=false tag=td>
+		<<thisSetAuthor>>
+	</$reveal>
+	<$reveal type='nomatch' state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_location' text=false tag=td>
+		<<thisSetLocation>>
+	</$reveal>
+	<$reveal type='nomatch' state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_owner' text=false tag=td>
+		<<thisSetOwner>>
+	</$reveal>
+	<$reveal type='nomatch' state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_series' text=false tag=td>
+		<<thisSetSeries>>
+	</$reveal>
+	<$reveal type='nomatch' state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_genre' text=false tag=td>
+		<<thisSetGenre>>
+	</$reveal>
+	<$reveal type='nomatch' state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_isbn' text=false tag=td>
+		<<thisEditISBN>>
+	</$reveal>
+	<$list filter='[is[system]prefix[$:/settings/inmysocks/Custom Field/]]'>
+		<$set name=CustomFieldName value={{!!field_name}}>
+			<<thisSetCustomFieldValue>>
+		</$set>
+	</$list>
+</tr>
+\end
+
+\define thisMakeCustomFieldDisplayState()
+$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!$(CustomFieldName)$
+\end
+
+\define thisCustomFieldDataTiddlerFilter()
+[[$:/data/$(DisplayTitle)$]indexes[]]
+\end
+
+\define thisSetCustomFieldValue()
+<$list filter='[[$:/settings/inmysocks/LibraryTracker/Library Tracker Settings]!$(CustomFieldName)$[false]]' variable=dummy>
+	<$reveal type='nomatch' state="""$:/state/Library Tracker/$(CurrentBook)$""" text='edit' tag=td>
+		<$button class='tc-btn-invisible' set="""$:/state/Library Tracker/$(CurrentBook)$""" setTo='edit'>
+			<$view tiddler=<<CurrentBook>> field={{!!field_name}}/>
+		</$button>
+	</$reveal>
+	<$reveal type='match' state="""$:/state/Library Tracker/$(CurrentBook)$""" text='edit' tag=td>
+		<$button class='tc-btn-invisible' set="""$:/state/Library Tracker/$(CurrentBook)$""" setTo='noedit'>
+			{{$:/core/images/done-button}}
+		</$button>
+		<$list filter='[<currentTiddler>custom_field_type[text_entry]]' variable=dummy>
+			<$edit-text tiddler="""$(CurrentBook)$""" field={{!!field_name}}/>
+		</$list>
+		<$list filter='[<currentTiddler>custom_field_type[select]]' variable=dummy>
+			<$set name=DisplayTitle value={{!!display_name}}>
+				<$select tiddler="""$(CurrentBook)$""" field={{!!field_name}}>
+					<$list filter=<<thisCustomFieldDataTiddlerFilter>>>
+						<option>
+							<<currentTiddler>>
+						</option>
+					</$list>
+				</$select>
+			</$set>
+		</$list>
+	</$reveal>
+</$list>
+\end
+
+\define thisBookList()
+<$list filter='[tag[Book]$(SelectedFilterPart)$sort[$(sortType)$]regexp:$(searchField)$[(?i)$(thisSearch)$]]+[limit{$:/settings/inmysocks/LibraryTracker/Library Tracker Settings/Limit!!limit}]' variable=CurrentBook>
+	<<thisInnerBookList>>
+</$list>
+\end
+
+\define thisBookList2()
+<$list filter='[tag[Book]sort[$(sortType)$]regexp:$(searchField)$[(?i)$(thisSearch)$]]+[limit{$:/settings/inmysocks/LibraryTracker/Library Tracker Settings/Limit!!limit}]' variable=CurrentBook>
+	<<thisInnerBookList>>
+</$list>
+\end
+
+\define thisSelectThing()
+<$reveal type='match' state='$:/state/newbook!!sort' text='author'>
+	<$select tiddler='$:/state/newbook' field='selected_type'>
+	<option value=''>
+		All
+	</option>
+		<$list filter='[[$:/data/BookAuthors]indexes[]]'>
+			<option>
+				<$view field='title'/>
+			</option>
+		</$list>
+	</$select>
+</$reveal>
+<$reveal type='match' state='$:/state/newbook!!sort' text='genre'>
+	<$select tiddler='$:/state/newbook' field='selected_type'>
+		<option value=''>
+			All
+		</option>
+		<$list filter='[[$:/data/BookGenres]indexes[]]'>
+			<option>
+				<$view field='title'/>
+			</option>
+		</$list>
+	</$select>
+</$reveal>
+<$reveal type='match' state='$:/state/newbook!!sort' text='series'>
+	<$select tiddler='$:/state/newbook' field='selected_type'>
+		<option value=''>
+			All
+		</option>
+		<$list filter='[[$:/data/SeriesTitles]indexes[]]'>
+			<option>
+				<$view field='title'/>
+			</option>
+		</$list>
+	</$select>
+</$reveal>
+<$reveal type='match' state='$:/state/newbook!!sort' text='location'>
+	<$select tiddler='$:/state/newbook' field='selected_type'>
+		<option value=''>
+			All
+		</option>
+		<$list filter='[[$:/data/BookLocations]indexes[]]'>
+			<option>
+				<$view field='title'/>
+			</option>
+		</$list>
+	</$select>
+</$reveal>
+<$reveal type='match' state='$:/state/newbook!!sort' text='owner'>
+	<$select tiddler='$:/state/newbook' field='selected_type'>
+		<option value=''>
+			All
+		</option>
+		<$list filter='[[$:/data/BookOwners]indexes[]]'>
+			<option>
+				<$view field='title'/>
+			</option>
+		</$list>
+	</$select>
+</$reveal>
+<$reveal type='match' state='$:/state/newbook!!sort' text='type'>
+	<$select tiddler='$:/state/newbook' field='selected_type'>
+		<option value=''>
+			All
+		</option>
+		<$list filter='[[$:/data/BookTypes]indexes[]]'>
+			<option>
+				<$view field='title'/>
+			</option>
+		</$list>
+	</$select>
+</$reveal>
+\end
+
+\define thisSortBySelect()
+<$select tiddler='$:/state/newbook' field='sort' default='title'>
+	<option value='title'>
+		Title
+	</option>
+	<$list filter='[[$:/settings/inmysocks/LibraryTracker/Library Tracker Settings]!show_author[false]]'>
+		<option value='author'>
+			Author
+		</option>
+	</$list>
+	<$list filter='[[$:/settings/inmysocks/LibraryTracker/Library Tracker Settings]!show_genre[false]]'>
+		<option value='genre'>
+			Genre
+		</option>
+	</$list>
+	<$list filter='[[$:/settings/inmysocks/LibraryTracker/Library Tracker Settings]!show_series[false]]'>
+		<option value='series'>
+			Series
+		</option>
+	</$list>
+	<$list filter='[[$:/settings/inmysocks/LibraryTracker/Library Tracker Settings]!show_location[false]]'>
+		<option value=location>
+			Location
+		</option>
+	</$list>
+	<$list filter='[[$:/settings/inmysocks/LibraryTracker/Library Tracker Settings]!show_type[false]]'>
+		<option value=item_type>
+			Item Type
+		</option>
+	</$list>
+	<$list filter='[[$:/settings/inmysocks/LibraryTracker/Library Tracker Settings]!show_owner[false]]'>
+		<option value=owner>
+			Owner
+		</option>
+	</$list>
+</$select>
+\end
+
+\define thisSearchBySelect()
+<$select tiddler='$:/state/newbook' field='search_in' default='title'>
+	<option value='tags'>
+		Tag
+	</option>
+	<option value='title'>
+		Title
+	</option>
+	<$list filter='[[$:/settings/inmysocks/LibraryTracker/Library Tracker Settings]!show_author[false]]'>
+		<option value='author'>
+			Author
+		</option>
+	</$list>
+	<$list filter='[[$:/settings/inmysocks/LibraryTracker/Library Tracker Settings]!show_genre[false]]'>
+		<option value='genre'>
+			Genre
+		</option>
+	</$list>
+	<$list filter='[[$:/settings/inmysocks/LibraryTracker/Library Tracker Settings]!show_series[false]]'>
+		<option value='series'>
+			Series
+		</option>
+	</$list>
+	<$list filter='[[$:/settings/inmysocks/LibraryTracker/Library Tracker Settings]!show_location[false]]'>
+		<option value=location>
+			Location
+		</option>
+	</$list>
+	<$list filter='[[$:/settings/inmysocks/LibraryTracker/Library Tracker Settings]!show_type[false]]'>
+		<option value=item_type>
+			Item Type
+		</option>
+	</$list>
+	<$list filter='[[$:/settings/inmysocks/LibraryTracker/Library Tracker Settings]!show_owner[false]]'>
+		<option value=owner>
+			Owner
+		</option>
+	</$list>
+</$select>
+\end
+
+\define thisTableHeader()
+<tr>
+	<th>
+		Title
+	</th>
+	<$reveal type='nomatch' state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_type' text=false tag=th>
+		Type
+	</$reveal>
+	<$reveal type='nomatch' state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_author' text=false tag=th>
+		Author
+	</$reveal>
+	<$reveal type='nomatch' state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_location' text=false tag=th>
+		Location
+	</$reveal>
+	<$reveal type='nomatch' state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_owner' text=false tag=th>
+		Owner
+	</$reveal>
+	<$reveal type='nomatch' state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_series' text=false tag=th>
+		Series
+	</$reveal>
+	<$reveal type='nomatch' state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_genre' text=false tag=th>
+		Genre
+	</$reveal>
+	<$reveal type='nomatch' state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_isbn' text=false tag=th>
+		ISBN
+	</$reveal>
+	<$list filter='[is[system]prefix[$:/settings/inmysocks/Custom Field/]]'>
+		<$set name=CustomFieldName value={{!!field_name}}>
+			<$reveal type=nomatch text=false state=<<thisMakeCustomFieldDisplayState>> tag=th>
+				<$view field=display_name/>
+			</$reveal>
+		</$set>
+	</$list>
+</tr>
+\end
+
+To edit an item, click on the field you want to change and use the dropdown menu to change the value. Edits happen immediately. Click on the <$button class='tc-btn-invisible'>{{$:/core/images/done-button}}</$button> to finish editing.
+
+|Sort by |<<thisSortBySelect>>|<<thisSelectThing>>|
+|Search by |<<thisSearchBySelect>>|<$edit-text tiddler='$:/state/newbook' field='search_text' placeholder='Search'/>|
+
+<$set name=sortType value={{$:/state/newbook!!sort}}>
+	<$set name=searchField value={{$:/state/newbook!!search_in}}>
+		<$set name=thisSearch value={{$:/state/newbook!!search_text}}>
+			<$set name=SelectedType value={{$:/state/newbook!!selected_type}}>
+				<$set name=SelectedFilterPart value=<<thisMakeSelectedValue>>>
+					<$reveal type='nomatch' state='$:/state/newbook!!selected_type' text=''>
+						Number of matching books: <<count1>>
+						<table
+              style='width:100%;'
+            >
+							<<thisTableHeader>>
+							<<thisBookList>>
+						</table>
+					</$reveal>
+					<$reveal type='match' state='$:/state/newbook!!selected_type' text=''>
+					Number of matching books: <<count2>>
+						<table
+              style='width:100%;'
+            >
+							<<thisTableHeader>>
+							<<thisBookList2>>
+						</table>
+					</$reveal>
+				</$set>
+			</$set>
+		</$set>
+	</$set>
+</$set>

@@ -1,0 +1,6 @@
+caption: Library Tracker
+list-after: Bookmarks
+tags: Dashboard
+title: $:/plugins/inmysocks/LibraryTracker/Library Tracker
+
+<<tabs "[[$:/plugins/inmysocks/LibraryTracker/Book List]] [[$:/plugins/inmysocks/LibraryTracker/Add Books]] [[$:/plugins/inmysocks/LibraryTracker/Manage Books]] [[$:/plugins/inmysocks/LibraryTracker/Library Tracker Settings]]" "[[$:/plugins/inmysocks/LibraryTracker/Book List]]">>

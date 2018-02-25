@@ -1,0 +1,147 @@
+caption: Settings
+edit_author_list: blerg
+show_author: true
+show_genre: true
+show_location: true
+show_series: true
+show_tags: true
+title: $:/plugins/inmysocks/LibraryTracker/Library Tracker Settings
+
+\define thisRemoveAuthor()
+Select Author: <$select tiddler='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings' field='edit_author_list'><$list filter='[[$:/data/BookAuthors]indexes[]]'><option><<currentTiddler>></option></$list></$select> <$button set='$:/data/BookAuthors##$(AuthorToRemove)$'>Remove Author</$button>
+\end
+
+\define thisRemoveSeries()
+Select Series: <$select tiddler='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings' field='edit_series_list'><$list filter='[[$:/data/SeriesTitles]indexes[]]'><option><<currentTiddler>></option></$list></$select> <$button set='$:/data/SeriesTitles##$(SeriesToRemove)$'>Remove Series</$button>
+\end
+
+\define thisRemoveGenre()
+Select Genre: <$select tiddler='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings' field='edit_genre_list'><$list filter='[[$:/data/BookGenres]indexes[]]'><option><<currentTiddler>></option></$list></$select> <$button set='$:/data/BookGenres##$(GenreToRemove)$'>Remove Genre</$button>
+\end
+
+\define thisRemoveLocation()
+Select Location: <$select tiddler='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings' field='edit_location_list'><$list filter='[[$:/data/BookLocations]indexes[]]'><option><<currentTiddler>></option></$list></$select> <$button set='$:/data/BookLocations##$(LocationToRemove)$'>Remove Location</$button>
+\end
+
+\define thisRemoveTag()
+Select Tag: <$select tiddler='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings' field='edit_tag_list'><$list filter='[[$:/data/BookTags]indexes[]]'><option><<currentTiddler>></option></$list></$select> <$button set='$:/data/BookTags##$(TagToRemove)$'>Remove Tag</$button>
+\end
+
+\define thisMakeCustomFieldTiddlerName()
+$:/settings/inmysocks/Custom Field/$(CustomFieldDisplayName)$
+\end
+
+<$reveal type='nomatch' state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_create_field' text='true'>
+	<$button>
+		Add User Defined Field
+		<$action-setfield $tiddler='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings' $field='show_create_field' $value='true'/>
+	</$button>
+	<$button class='tc-btn-invisible' popup='$:/state/Library Tracker/Add User Defined Field Info'>
+		^^(?)^^
+	</$button>
+	<$reveal type='popup' state='$:/state/Library Tracker/Add User Defined Field Info'>
+		<div class='tc-drop-down'>
+			This allows you to add a custom column to the library tracker.
+		</div>
+	</$reveal>
+</$reveal>
+<$reveal type='match' state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_create_field' text='true'>
+	Display Name:
+	<$button class='tc-btn-invisible' popup='$:/state/Library Tracker/Display Name Info'>
+		^^(?)^^
+	</$button>
+	<$reveal type='popup' state='$:/state/Library Tracker/Display Name Info'>
+		<div class='tc-drop-down'>
+			This is the name that will show up as the column header in the library listing.
+		</div>
+	</$reveal>
+	<$edit-text tiddler='$:/state/Library Tracker' field='display_name_temp' class='tc-edit-texteditor'/>
+	Field Name:
+	<$button class='tc-btn-invisible' popup='$:/state/Library Tracker/Field Name Info'>
+		^^(?)^^
+	</$button>
+	<$reveal type='popup' state='$:/state/Library Tracker/Field Name Info'>
+		<div class='tc-drop-down'>
+			This is the field name used, it must follow the rules for field names. It can only have lower case letters, numbers and the characters `-`, `_` and `.`.
+		</div>
+	</$reveal>
+	<$edit-text tiddler='$:/state/Library Tracker' field='field_name_temp' class='tc-edit-texteditor'/>
+	Field Type:
+	<$button class='tc-btn-invisible' popup='$:/state/Library Tracker/Field Type Info'>
+		^^(?)^^
+	</$button>
+	<$reveal type='popup' state='$:/state/Library Tracker/Field Type Info'>
+		<div class="tc-drop-down">
+			`Select` lets you define values and select them from a dropdown menu, like how the default `Author` field does.<br>`Text Entry` lets you enter text for each item, like how the default `ISBN` field works.
+		</div>
+	</$reveal>
+	<$radio tiddler='$:/state/Library Tracker' field='field_type' value=select>Select</$radio> <$radio tiddler='$:/state/Library Tracker' field='field_type' value=text_entry>Text Entry</$radio>
+	<br>
+	<$set name=CustomFieldDisplayName value={{$:/state/Library Tracker!!display_name_temp}}>
+		<$button>
+			Add Field
+			<$action-setfield $tiddler=<<thisMakeCustomFieldTiddlerName>> field_name={{$:/state/Library Tracker!!field_name_temp}} display_name={{$:/state/Library Tracker!!display_name_temp}} custom_field_type={{$:/state/Library Tracker!!field_type}}/>
+			<$action-setfield $tiddler='$:/state/Library Tracker' $field='display_name_temp' $value=''/>
+			<$action-setfield $tiddler='$:/state/Library Tracker' $field='field_name_temp' $value=''/>
+		</$button>
+	</$set>
+	<$button class='tc-btn-invisible' popup='$:/state/Library Tracker/Add Field Button Info'>
+		^^(?)^^
+	</$button>
+	<$reveal type='popup' state='$:/state/Library Tracker/Add Field Button Info'>
+		<div class='tc-drop-down'>
+			This button will add a field with the above properties as an option in the library tracker.
+		</div>
+	</$reveal>
+	<$button>
+		Done
+		<$action-setfield $tiddler='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings' $field='show_create_field' $value='false'/>
+		<$action-setfield $tiddler='$:/state/Library Tracker' $field='display_name_temp' $value=''/>
+		<$action-setfield $tiddler='$:/state/Library Tracker' $field='field_name_temp' $value=''/>
+	</$button>
+	<$button class='tc-btn-invisible' popup='$:/state/Library Tracker/User Defined Field Done Button Info'>
+		^^(?)^^
+	</$button>
+	<$reveal type='popup' state='$:/state/Library Tracker/User Defined Field Done Button Info'>
+		<div class='tc-drop-down'>
+			This closes the `Add User Defined Field` dialog without adding a field.
+		</div>
+	</$reveal>
+</$reveal>
+
+<$checkbox tiddler='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings' field='show_type' checked=true unchecked=false default='true'>Show Item Type</$checkbox><br>
+<$checkbox tiddler='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings' field='show_author' checked=true unchecked=false default='true'>Show Author</$checkbox><br>
+<$checkbox tiddler='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings' field='show_series' checked=true unchecked=false default='true'>Show Series</$checkbox><br>
+<$checkbox tiddler='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings' field='show_genre' checked=true unchecked=false default='true'>Show Genre</$checkbox><br>
+<$checkbox tiddler='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings' field='show_location' checked=true unchecked=false default='true'>Show Location</$checkbox><br>
+<$checkbox tiddler='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings' field='show_owner' checked=true unchecked=false default='true'>Show Owner</$checkbox><br>
+<$checkbox tiddler='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings' field='show_tags' checked=true unchecked=false default='true'>Show Tags</$checkbox><br>
+<$checkbox tiddler='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings' field='show_isbn' checked=true unchecked=false default='true'>Show ISBN</$checkbox><br>
+<$list filter='[is[system]prefix[$:/settings/inmysocks/Custom Field/]]'>
+	<$checkbox tiddler='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings' field={{!!field_name}} checked=true unchecked=false default='true'>Show {{!!display_name}}</$checkbox><br>
+</$list>
+
+!!Edit Author List
+<$set name=AuthorToRemove value={{$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!edit_author_list}}>
+<<thisRemoveAuthor>>
+</$set>
+
+!!Edit Series List
+<$set name=SeriesToRemove value={{$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!edit_series_list}}>
+<<thisRemoveSeries>>
+</$set>
+
+!!Edit Genre List
+<$set name=GenreToRemove value={{$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!edit_genre_list}}>
+<<thisRemoveGenre>>
+</$set>
+
+!!Edit Location List
+<$set name=LocationToRemove value={{$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!edit_location_list}}>
+<<thisRemoveLocation>>
+</$set>
+
+!!Edit Tag List
+<$set name=TagToRemove value={{$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!edit_tag_list}}>
+<<thisRemoveTag>>
+</$set>

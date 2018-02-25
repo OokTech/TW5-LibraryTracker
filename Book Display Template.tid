@@ -1,0 +1,12 @@
+title: $:/plugins/inmysocks/LibraryTracker/BookViewTemplate
+tags: $:/tags/ViewTemplate
+
+<$list
+  filter='[is[current]tag[Book]]'
+  variable='ignore'
+>
+
+|!Name |!Author |!Series |!Genre |!Type |!Location |!Owner |
+|{{!!title}} |{{!!author}} |{{!!series}} |{{!!genre}} |{{!!item_type}} |{{!!location}} |{{!!owner}} |
+
+</$list>

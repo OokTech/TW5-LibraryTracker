@@ -1,0 +1,371 @@
+caption: Add Books
+title: $:/plugins/inmysocks/LibraryTracker/Add Books
+
+\define thisSeriesSelect()
+<$select tiddler='$:/temp/newbook' field='series' default='None'>
+	<option value=''>--</option>
+	<$list filter='[[$:/data/SeriesTitles]indexes[]sort[title]regexp:[(?i)$(thisSeriesSearch)$]]'>
+		<option value=<<currentTiddler>>>
+			<$view field='title'/>
+		</option>
+	</$list>
+</$select>
+\end
+
+\define thisGenreSelect()
+<$select tiddler='$:/temp/newbook' field='genre' default='None'>
+	<option value=''>--</option>
+	<$list filter='[[$:/data/BookGenres]indexes[]sort[title]regexp:[(?i)$(thisGenreSearch)$]]'>
+		<option value=<<currentTiddler>>>
+			<$view field='title'/>
+		</option>
+	</$list>
+</$select>
+\end
+
+\define thisAuthorSelect()
+<$select tiddler='$:/temp/newbook' field='author' default='None'>
+	<option value=''>--</option>
+	<$list filter='[[$:/data/BookAuthors]indexes[]sort[title]regexp:[(?i)$(thisAuthorSearch)$]]'>
+		<option value=<<currentTiddler>>>
+			<$view field='title'/>
+		</option>
+	</$list>
+</$select>
+\end
+
+\define thisLocationSelect()
+<$select tiddler='$:/temp/newbook' field='location' default='None'>
+	<option value=''>--</option>
+	<$list filter='[[$:/data/BookLocations]indexes[]sort[title]regexp:[(?i)$(thisLocationSearch)$]]'>
+		<option value=<<currentTiddler>>>
+			<$view field='title'/>
+		</option>
+	</$list>
+</$select>
+\end
+
+\define thisTagSelect()
+<$select tiddler='$:/state/booktag' field='selected_tag'>
+	<option value=''>--</option>
+	<$list filter='[[$:/data/BookTags]indexes[]sort[title]regexp:[(?i)$(thisTagSearch)$]]'>
+		<option value=<<currentTiddler>>>
+			<$view field='title'/>
+		</option>
+	</$list>
+</$select>
+\end
+
+\define thisOwnerSelect()
+<$select tiddler='$:/temp/newbook' field='owner' default='None'>
+	<option value=''>--</option>
+	<$list filter='[[$:/data/BookOwners]indexes[]sort[title]regexp:[(?i)$(thisOwnerSearch)$]]'>
+		<option value=<<currentTiddler>>>
+			<$view field='title'/>
+		</option>
+	</$list>
+</$select>
+\end
+
+\define thisTypeSelect()
+<$select tiddler='$:/temp/newbook' field='item_type'>
+	<option value=''>--</option>
+	<$list filter='[[$:/data/BookTypes]indexes[]sort[title]regexp:[(?i)$(thisTypeSearch)$]]'> <!--  [[Book]][[Video Game]][[Board/Card Game]][[Movie]]'>-->
+		<option>
+			<<currentTiddler>>
+		</option>
+	</$list>
+</$select>
+\end
+
+\define thisCustomFieldSelect()
+<$select tiddler='$:/temp/newbook' field={{!!field_name}}>
+	<option value=''>--</option>
+	<$list filter='[[$:/data/$(DisplayName)$]indexes[]sort[title]]'>
+		<option>
+			<<currentTiddler>>
+		</option>
+	</$list>
+</$select>
+\end
+
+\define thisMakeCustomFieldDisplayState()
+$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!$(CustomFieldName)$
+\end
+
+\define thisMakeAddCustomFieldEntryState()
+$:/state/Library Tracker/add $(DisplayName)$
+\end
+
+\define thisMakeDataTiddlerName()
+$:/data/$(DisplayName)$
+\end
+
+\define thisMakeIndexValue()
+<$action-setfield $tiddler=<<thisMakeDataTiddlerName>> $index={{$:/state/newbook!!$(FieldName)$}} $value=1/>
+\end
+
+Adding Items:
+
+<!--Type-->
+Type:
+<$reveal state='$:/state/Library Tracker/add type' type=nomatch text='new'>
+	<$set name=thisTypeSearch value={{$:/state/newbook!!narrow_type_select}}>
+		<<thisTypeSelect>>
+	</$set>
+	<$edit-text tiddler='$:/state/newbook' field='narrow_type_select' placeholder='Narrow Type List'/>
+	(<$button set='$:/state/Library Tracker/add type' setTo='new'>New Item Type</$button>)
+</$reveal>
+<$reveal state='$:/state/Library Tracker/add type' type=match text='new'>
+	<$edit-text tiddler='$:/state/newbook' field='book_type' placeholder='Item Type'/>
+	<$button>
+		Add
+		<$action-setfield $tiddler='$:/data/BookTypes' $index={{$:/state/newbook!!book_type}} $value=1/>
+		<$action-setfield $tiddler='$:/state/newbook' $field='book_author' $value=''/>
+	</$button>
+	<$button set='$:/state/Library Tracker/add type' setTo='notnew'>
+		Done
+	</$button>
+</$reveal>
+<br>
+<!--End Type-->
+<!--Title-->
+Title:
+<$edit-text tiddler='$:/state/newbook' field='book_title' class='tc-edit-texteditor' placeholder='Book Title'/>
+<!--End Title-->
+<!--Author-->
+<$reveal type=nomatch text=false state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_author'>
+	Author: 
+	<$reveal state='$:/state/Library Tracker/add author' type=nomatch text='new'>
+		<$set name=thisAuthorSearch value={{$:/state/newbook!!narrow_author_select}}>
+			<<thisAuthorSelect>>
+		</$set>
+		<$edit-text tiddler='$:/state/newbook' field='narrow_author_select' placeholder='Narrow Author List'/>
+		(<$button set='$:/state/Library Tracker/add author' setTo='new'>New Author</$button>)
+	</$reveal>
+	<$reveal state='$:/state/Library Tracker/add author' type=match text='new'>
+		<$edit-text tiddler='$:/state/newbook' field='book_author' placeholder='Author'/>
+		<$button>
+			Add
+			<$action-setfield $tiddler='$:/data/BookAuthors' $index={{$:/state/newbook!!book_author}} $value=1/>
+			<$action-setfield $tiddler='$:/state/newbook' $field='book_author' $value=''/>
+		</$button>
+		<$button set='$:/state/Library Tracker/add author' setTo='notnew'>
+			Done
+		</$button>
+	</$reveal>
+	<br>
+</$reveal>
+<!--End Author-->
+<!--Series-->
+<$reveal type=nomatch text=false state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_series'>
+	Series:
+	<$reveal state='$:/state/Library Tracker/add series' type=nomatch text='new'>
+		<$set name=thisSeriesSearch value={{$:/state/newbook!!narrow_series_select}}>
+			<<thisSeriesSelect>>
+		</$set>
+		<$edit-text tiddler='$:/state/newbook' field='narrow_series_select' placeholder='Narrow Series List'/> 
+		(<$button set='$:/state/Library Tracker/add series' setTo='new'>New Series</$button>)
+	</$reveal>
+	<$reveal state='$:/state/Library Tracker/add series' type=match text='new'>
+		<$edit-text tiddler='$:/state/newbook' field='book_series' placeholder='Series Title'/>
+		<$button>
+			Add
+			<$action-setfield $tiddler='$:/data/SeriesTitles' $index={{$:/state/newbook!!book_series}} $value=1/>
+			<$action-setfield $tiddler='$:/state/newbook' $field='book_series' $value=''/>
+		</$button>
+		<$button set='$:/state/Library Tracker/add series' setTo='notnew'>
+			Done
+		</$button>
+	</$reveal>
+	<br>
+</$reveal>
+<!--End Series-->
+<!--Genre-->
+<$reveal type=nomatch text=false state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_genre'>
+	Genre:
+	<$reveal state='$:/state/Library Tracker/add genre' type=nomatch text='new'>
+		<$set name=thisGenreSearch value={{$:/state/newbook!!narrow_genre_select}}>
+			<<thisGenreSelect>>
+		</$set>
+		<$edit-text tiddler='$:/state/newbook' field='narrow_genre_select' placeholder='Narrow Genre List'/>
+		(<$button set='$:/state/Library Tracker/add genre' setTo='new'>New Genre</$button>)
+	</$reveal>
+	<$reveal state='$:/state/Library Tracker/add genre' type=match text='new'>
+		<$edit-text tiddler='$:/state/newbook' field='book_genre' placeholder='Genre'/>
+		<$button>
+			Add
+			<$action-setfield $tiddler='$:/data/BookGenres' $index={{$:/state/newbook!!book_genre}} $value=1/>
+			<$action-setfield $tiddler='$:/state/newbook' $field='book_genre' $value=''/>
+		</$button>
+		<$button set='$:/state/Library Tracker/add genre' setTo='notnew'>
+			Done
+		</$button>
+	</$reveal>
+	<br>
+</$reveal>
+<!--End Genre-->
+<!--ISBN-->
+<$reveal type=nomatch text=false state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_isbn'>
+	ISBN: <$edit-text tiddler='$:/temp/newbook' field='isbn' class='tc-edit-texteditor' placeholder='ISBN'/>
+</$reveal>
+<!--End ISBN-->
+<!--Location-->
+<$reveal type=nomatch text=false state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_location'>
+	Location:
+	<$reveal state='$:/state/Library Tracker/add location' type=nomatch text='new'>
+		<$set name=thisLocationSearch value={{$:/state/newbook!!narrow_location_select}}>
+			<<thisLocationSelect>>
+		</$set>
+		<$edit-text tiddler='$:/state/newbook' field='narrow_location_select' placeholder='Narrow Location List'/>
+		(<$button set='$:/state/Library Tracker/add location' setTo='new'>New  Location</$button>)
+	</$reveal>
+	<$reveal state='$:/state/Library Tracker/add location' type=match text='new'>
+		<$edit-text tiddler='$:/state/newbook' field='book_location' placeholder='Location'/>
+		<$button>
+			Add
+			<$action-setfield $tiddler='$:/data/BookLocations' $index={{$:/state/newbook!!book_location}} $value=1/>
+			<$action-setfield $tiddler='$:/state/newbook' $field='book_location' $value=''/>
+		</$button>
+		<$button set='$:/state/Library Tracker/add location' setTo='notnew'>
+			Done
+		</$button>
+	</$reveal>
+	<br>
+</$reveal>
+<!--End Location-->
+<!--Owner-->
+<$reveal type=nomatch text=false state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_owner'>
+	Owner:
+	<$reveal state='$:/state/Library Tracker/add owner' type=nomatch text='new'>
+		<$set name=thisOwnerSearch value={{$:/state/newbook!!narrow_owner_select}}>
+			<<thisOwnerSelect>>
+		</$set>
+		<$edit-text tiddler='$:/state/newbook' field='narrow_owner_select' placeholder='Narrow Owner List'/>
+		(<$button set='$:/state/Library Tracker/add owner' setTo='new'>New  Owner</$button>)
+	</$reveal>
+	<$reveal state='$:/state/Library Tracker/add owner' type=match text='new'>
+		<$edit-text tiddler='$:/state/newbook' field='owner' placeholder='Owner'/>
+		<$button>
+			Add
+			<$action-setfield $tiddler='$:/data/BookOwners' $index={{$:/state/newbook!!owner}} $value=1/>
+			<$action-setfield $tiddler='$:/state/newbook' $field='owner' $value=''/>
+		</$button>
+		<$button set='$:/state/Library Tracker/add owner' setTo='notnew'>
+			Done
+		</$button>
+	</$reveal>
+</$reveal>
+<br>
+<!--End Owner-->
+<!--Custom Fields-->
+<$list filter='[is[system]prefix[$:/settings/inmysocks/Custom Field/]]'>
+	<$set name=CustomFieldName value={{!!field_name}}>
+		<$reveal type=nomatch text=false state=<<thisMakeCustomFieldDisplayState>>>
+			<$view field=display_name/>:
+			<$set name=DisplayName value={{!!display_name}}>
+				<$set name=FieldName value={{!!field_name}}>
+					<$reveal type='match' state='!!custom_field_type' text=select>
+						<$reveal state=<<thisMakeAddCustomFieldEntryState>> type=nomatch text='new'>
+							<<thisCustomFieldSelect>>
+							(<$button set=<<thisMakeAddCustomFieldEntryState>> setTo='new'>
+								New <$view field=display_name/>
+							</$button>)
+						</$reveal>
+						<$reveal state=<<thisMakeAddCustomFieldEntryState>> type=match text='new'>
+							<$edit-text tiddler='$:/state/newbook' field={{!!field_name}} placeholder={{!!display_name}}/>
+							<$button>
+								Add
+								<<thisMakeIndexValue>>
+								<$action-setfield $tiddler='$:/state/newbook' $field={{!!field_name}} $value=''/>
+							</$button>
+							<$button set=<<thisMakeAddCustomFieldEntryState>> setTo='notnew'>
+								Done
+							</$button>
+						</$reveal>
+					</$reveal>
+				</$set>
+			</$set>
+			<$reveal type='match' state='!!custom_field_type' text=text_entry>
+				<$edit-text tiddler='$:/temp/newbook' field={{!!field_name}} class='tc-edit-texteditor' placeholder={{!!display_name}}/>
+			</$reveal>
+		</$reveal>
+	</$set>
+	<br>
+</$list>
+<!--End Custom Fields-->
+
+
+<!--Tags-->
+<$reveal type=nomatch text=false state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_tags'>
+	Tags (it will always be tagged with `Book` by default):
+	<br>
+	<$reveal type=match state='$:/state/newbook!!add_or_create_tag' text='create'>
+		New Tag:
+		<$edit-text tiddler='$:/state/booktag' field='tag_temp' placeholder='New Tag'/>
+		<$button>
+			Create Tag
+			<$action-setfield $tiddler='$:/data/BookTags' $index={{$:/state/booktag!!tag_temp}} $value=1/>
+			<$action-setfield $tiddler='$:/state/booktag' $field='tag_temp' $value=''/>
+		</$button>
+		<$button set='$:/state/newbook!!add_or_create_tag' setTo='nocreate'>
+			Done
+		</$button>
+		<br>
+	</$reveal>
+	<$reveal type='nomatch' state='$:/state/newbook!!add_or_create_tag' text='create'>
+		Tag to add: 
+		<$set name=thisTagSearch value={{$:/state/newbook!!narrow_tag_select}}>
+			<<thisTagSelect>>
+		</$set>
+		<$fieldmangler tiddler='$:/temp/newbook'>
+			<$button>
+				Add Tag
+				<$action-sendmessage $message='tm-add-tag' $param={{$:/state/booktag!!selected_tag}}/>
+			</$button>
+			<$edit-text tiddler='$:/state/newbook' field='narrow_tag_select' placeholder='Narrow Tag List'/>
+			(<$button set='$:/state/newbook!!add_or_create_tag' setTo='create'>New Tag</$button>)
+		</$fieldmangler>
+		<br>
+	</$reveal>
+	List of current tags:
+	<br>
+	<$fieldmangler tiddler='$:/temp/newbook'>
+		<$list filter='[[$:/temp/newbook]tags[]]'>
+			<$view field='title'/>
+			<$button>
+				Remove Tag
+				<$action-sendmessage $message='tm-remove-tag' $param=<<currentTiddler>>/>
+			</$button>
+			<br>
+		</$list>
+	</$fieldmangler>
+</$reveal>
+
+<$fieldmangler tiddler={{$:/state/newbook!!book_title}}>
+	<$button>
+		Add Book
+		<$reveal type=match text=false state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_author'>
+			<$action-setfield $tiddler='$:/temp/newbook' author=''/>
+		</$reveal>
+		<$reveal type=match text=false state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_series'>
+			<$action-setfield $tiddler='$:/temp/newbook' series=''/>
+		</$reveal>
+		<$reveal type=match text=false state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_genre'>
+			<$action-setfield $tiddler='$:/temp/newbook' genre=''/>
+		</$reveal>
+		<$reveal type=match text=false state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_location'>
+			<$action-setfield $tiddler='$:/temp/newbook' location=''/>
+		</$reveal>
+		<$reveal type=match text=false state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_owner'>
+			<$action-setfield $tiddler='$:/temp/newbook' owner=''/>
+		</$reveal>
+		<$reveal type=match text=false state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_isbn'>
+			<$action-setfield $tiddler='$:/temp/newbook' isbn=''/>
+		</$reveal>
+		<$action-setfield $tiddler='$:/temp/newbook' title={{$:/state/newbook!!book_title}}/>
+		<$action-sendmessage $message='tm-add-tag' $param='Book'/>
+		<$action-setfield $tiddler='$:/state/newbook' book_title=''/>
+		<$action-setfield $tiddler='$:/temp/newbook' tags=''/>
+	</$button>
+</$fieldmangler>
