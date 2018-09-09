@@ -1,5 +1,5 @@
 caption: Add Books
-title: $:/plugins/inmysocks/LibraryTracker/Add Books
+title: $:/plugins/OokTech/LibraryTracker/Add Books
 
 \define thisSeriesSelect()
 <$select tiddler='$:/temp/newbook' field='series' default='None'>
@@ -90,7 +90,7 @@ title: $:/plugins/inmysocks/LibraryTracker/Add Books
 \end
 
 \define thisMakeCustomFieldDisplayState()
-$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!$(CustomFieldName)$
+$:/settings/OokTech/LibraryTracker/Library Tracker Settings!!$(CustomFieldName)$
 \end
 
 \define thisMakeAddCustomFieldEntryState()
@@ -134,8 +134,8 @@ Title:
 <$edit-text tiddler='$:/state/newbook' field='book_title' class='tc-edit-texteditor' placeholder='Book Title'/>
 <!--End Title-->
 <!--Author-->
-<$reveal type=nomatch text=false state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_author'>
-	Author: 
+<$reveal type=nomatch text=false state='$:/settings/OokTech/LibraryTracker/Library Tracker Settings!!show_author'>
+	Author:
 	<$reveal state='$:/state/Library Tracker/add author' type=nomatch text='new'>
 		<$set name=thisAuthorSearch value={{$:/state/newbook!!narrow_author_select}}>
 			<<thisAuthorSelect>>
@@ -158,13 +158,13 @@ Title:
 </$reveal>
 <!--End Author-->
 <!--Series-->
-<$reveal type=nomatch text=false state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_series'>
+<$reveal type=nomatch text=false state='$:/settings/OokTech/LibraryTracker/Library Tracker Settings!!show_series'>
 	Series:
 	<$reveal state='$:/state/Library Tracker/add series' type=nomatch text='new'>
 		<$set name=thisSeriesSearch value={{$:/state/newbook!!narrow_series_select}}>
 			<<thisSeriesSelect>>
 		</$set>
-		<$edit-text tiddler='$:/state/newbook' field='narrow_series_select' placeholder='Narrow Series List'/> 
+		<$edit-text tiddler='$:/state/newbook' field='narrow_series_select' placeholder='Narrow Series List'/>
 		(<$button set='$:/state/Library Tracker/add series' setTo='new'>New Series</$button>)
 	</$reveal>
 	<$reveal state='$:/state/Library Tracker/add series' type=match text='new'>
@@ -182,7 +182,7 @@ Title:
 </$reveal>
 <!--End Series-->
 <!--Genre-->
-<$reveal type=nomatch text=false state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_genre'>
+<$reveal type=nomatch text=false state='$:/settings/OokTech/LibraryTracker/Library Tracker Settings!!show_genre'>
 	Genre:
 	<$reveal state='$:/state/Library Tracker/add genre' type=nomatch text='new'>
 		<$set name=thisGenreSearch value={{$:/state/newbook!!narrow_genre_select}}>
@@ -206,12 +206,12 @@ Title:
 </$reveal>
 <!--End Genre-->
 <!--ISBN-->
-<$reveal type=nomatch text=false state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_isbn'>
+<$reveal type=nomatch text=false state='$:/settings/OokTech/LibraryTracker/Library Tracker Settings!!show_isbn'>
 	ISBN: <$edit-text tiddler='$:/temp/newbook' field='isbn' class='tc-edit-texteditor' placeholder='ISBN'/>
 </$reveal>
 <!--End ISBN-->
 <!--Location-->
-<$reveal type=nomatch text=false state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_location'>
+<$reveal type=nomatch text=false state='$:/settings/OokTech/LibraryTracker/Library Tracker Settings!!show_location'>
 	Location:
 	<$reveal state='$:/state/Library Tracker/add location' type=nomatch text='new'>
 		<$set name=thisLocationSearch value={{$:/state/newbook!!narrow_location_select}}>
@@ -235,7 +235,7 @@ Title:
 </$reveal>
 <!--End Location-->
 <!--Owner-->
-<$reveal type=nomatch text=false state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_owner'>
+<$reveal type=nomatch text=false state='$:/settings/OokTech/LibraryTracker/Library Tracker Settings!!show_owner'>
 	Owner:
 	<$reveal state='$:/state/Library Tracker/add owner' type=nomatch text='new'>
 		<$set name=thisOwnerSearch value={{$:/state/newbook!!narrow_owner_select}}>
@@ -259,7 +259,7 @@ Title:
 <br>
 <!--End Owner-->
 <!--Custom Fields-->
-<$list filter='[is[system]prefix[$:/settings/inmysocks/Custom Field/]]'>
+<$list filter='[is[system]prefix[$:/settings/OokTech/Custom Field/]]'>
 	<$set name=CustomFieldName value={{!!field_name}}>
 		<$reveal type=nomatch text=false state=<<thisMakeCustomFieldDisplayState>>>
 			<$view field=display_name/>:
@@ -297,7 +297,7 @@ Title:
 
 
 <!--Tags-->
-<$reveal type=nomatch text=false state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_tags'>
+<$reveal type=nomatch text=false state='$:/settings/OokTech/LibraryTracker/Library Tracker Settings!!show_tags'>
 	Tags (it will always be tagged with `Book` by default):
 	<br>
 	<$reveal type=match state='$:/state/newbook!!add_or_create_tag' text='create'>
@@ -314,7 +314,7 @@ Title:
 		<br>
 	</$reveal>
 	<$reveal type='nomatch' state='$:/state/newbook!!add_or_create_tag' text='create'>
-		Tag to add: 
+		Tag to add:
 		<$set name=thisTagSearch value={{$:/state/newbook!!narrow_tag_select}}>
 			<<thisTagSelect>>
 		</$set>
@@ -345,22 +345,22 @@ Title:
 <$fieldmangler tiddler={{$:/state/newbook!!book_title}}>
 	<$button>
 		Add Book
-		<$reveal type=match text=false state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_author'>
+		<$reveal type=match text=false state='$:/settings/OokTech/LibraryTracker/Library Tracker Settings!!show_author'>
 			<$action-setfield $tiddler='$:/temp/newbook' author=''/>
 		</$reveal>
-		<$reveal type=match text=false state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_series'>
+		<$reveal type=match text=false state='$:/settings/OokTech/LibraryTracker/Library Tracker Settings!!show_series'>
 			<$action-setfield $tiddler='$:/temp/newbook' series=''/>
 		</$reveal>
-		<$reveal type=match text=false state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_genre'>
+		<$reveal type=match text=false state='$:/settings/OokTech/LibraryTracker/Library Tracker Settings!!show_genre'>
 			<$action-setfield $tiddler='$:/temp/newbook' genre=''/>
 		</$reveal>
-		<$reveal type=match text=false state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_location'>
+		<$reveal type=match text=false state='$:/settings/OokTech/LibraryTracker/Library Tracker Settings!!show_location'>
 			<$action-setfield $tiddler='$:/temp/newbook' location=''/>
 		</$reveal>
-		<$reveal type=match text=false state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_owner'>
+		<$reveal type=match text=false state='$:/settings/OokTech/LibraryTracker/Library Tracker Settings!!show_owner'>
 			<$action-setfield $tiddler='$:/temp/newbook' owner=''/>
 		</$reveal>
-		<$reveal type=match text=false state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_isbn'>
+		<$reveal type=match text=false state='$:/settings/OokTech/LibraryTracker/Library Tracker Settings!!show_isbn'>
 			<$action-setfield $tiddler='$:/temp/newbook' isbn=''/>
 		</$reveal>
 		<$action-setfield $tiddler='$:/temp/newbook' title={{$:/state/newbook!!book_title}}/>

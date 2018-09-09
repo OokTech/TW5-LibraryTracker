@@ -1,6 +1,6 @@
 caption: Library Tracker
 list-after: Bookmarks
 tags: Dashboard
-title: $:/plugins/inmysocks/LibraryTracker/Library Tracker
+title: $:/plugins/OokTech/LibraryTracker/Library Tracker
 
-<<tabs "[[$:/plugins/inmysocks/LibraryTracker/Book List]] [[$:/plugins/inmysocks/LibraryTracker/Add Books]] [[$:/plugins/inmysocks/LibraryTracker/Manage Books]] [[$:/plugins/inmysocks/LibraryTracker/Library Tracker Settings]]" "[[$:/plugins/inmysocks/LibraryTracker/Book List]]">>
+<<tabs "[[$:/plugins/OokTech/LibraryTracker/Book List]] [[$:/plugins/OokTech/LibraryTracker/Add Books]] [[$:/plugins/OokTech/LibraryTracker/Manage Books]] [[$:/plugins/OokTech/LibraryTracker/Library Tracker Settings]]" "[[$:/plugins/OokTech/LibraryTracker/Book List]]">>

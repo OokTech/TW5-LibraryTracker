@@ -5,36 +5,36 @@ show_genre: true
 show_location: true
 show_series: true
 show_tags: true
-title: $:/plugins/inmysocks/LibraryTracker/Library Tracker Settings
+title: $:/plugins/OokTech/LibraryTracker/Library Tracker Settings
 
 \define thisRemoveAuthor()
-Select Author: <$select tiddler='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings' field='edit_author_list'><$list filter='[[$:/data/BookAuthors]indexes[]]'><option><<currentTiddler>></option></$list></$select> <$button set='$:/data/BookAuthors##$(AuthorToRemove)$'>Remove Author</$button>
+Select Author: <$select tiddler='$:/settings/OokTech/LibraryTracker/Library Tracker Settings' field='edit_author_list'><$list filter='[[$:/data/BookAuthors]indexes[]]'><option><<currentTiddler>></option></$list></$select> <$button set='$:/data/BookAuthors##$(AuthorToRemove)$'>Remove Author</$button>
 \end
 
 \define thisRemoveSeries()
-Select Series: <$select tiddler='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings' field='edit_series_list'><$list filter='[[$:/data/SeriesTitles]indexes[]]'><option><<currentTiddler>></option></$list></$select> <$button set='$:/data/SeriesTitles##$(SeriesToRemove)$'>Remove Series</$button>
+Select Series: <$select tiddler='$:/settings/OokTech/LibraryTracker/Library Tracker Settings' field='edit_series_list'><$list filter='[[$:/data/SeriesTitles]indexes[]]'><option><<currentTiddler>></option></$list></$select> <$button set='$:/data/SeriesTitles##$(SeriesToRemove)$'>Remove Series</$button>
 \end
 
 \define thisRemoveGenre()
-Select Genre: <$select tiddler='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings' field='edit_genre_list'><$list filter='[[$:/data/BookGenres]indexes[]]'><option><<currentTiddler>></option></$list></$select> <$button set='$:/data/BookGenres##$(GenreToRemove)$'>Remove Genre</$button>
+Select Genre: <$select tiddler='$:/settings/OokTech/LibraryTracker/Library Tracker Settings' field='edit_genre_list'><$list filter='[[$:/data/BookGenres]indexes[]]'><option><<currentTiddler>></option></$list></$select> <$button set='$:/data/BookGenres##$(GenreToRemove)$'>Remove Genre</$button>
 \end
 
 \define thisRemoveLocation()
-Select Location: <$select tiddler='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings' field='edit_location_list'><$list filter='[[$:/data/BookLocations]indexes[]]'><option><<currentTiddler>></option></$list></$select> <$button set='$:/data/BookLocations##$(LocationToRemove)$'>Remove Location</$button>
+Select Location: <$select tiddler='$:/settings/OokTech/LibraryTracker/Library Tracker Settings' field='edit_location_list'><$list filter='[[$:/data/BookLocations]indexes[]]'><option><<currentTiddler>></option></$list></$select> <$button set='$:/data/BookLocations##$(LocationToRemove)$'>Remove Location</$button>
 \end
 
 \define thisRemoveTag()
-Select Tag: <$select tiddler='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings' field='edit_tag_list'><$list filter='[[$:/data/BookTags]indexes[]]'><option><<currentTiddler>></option></$list></$select> <$button set='$:/data/BookTags##$(TagToRemove)$'>Remove Tag</$button>
+Select Tag: <$select tiddler='$:/settings/OokTech/LibraryTracker/Library Tracker Settings' field='edit_tag_list'><$list filter='[[$:/data/BookTags]indexes[]]'><option><<currentTiddler>></option></$list></$select> <$button set='$:/data/BookTags##$(TagToRemove)$'>Remove Tag</$button>
 \end
 
 \define thisMakeCustomFieldTiddlerName()
-$:/settings/inmysocks/Custom Field/$(CustomFieldDisplayName)$
+$:/settings/OokTech/Custom Field/$(CustomFieldDisplayName)$
 \end
 
-<$reveal type='nomatch' state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_create_field' text='true'>
+<$reveal type='nomatch' state='$:/settings/OokTech/LibraryTracker/Library Tracker Settings!!show_create_field' text='true'>
 	<$button>
 		Add User Defined Field
-		<$action-setfield $tiddler='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings' $field='show_create_field' $value='true'/>
+		<$action-setfield $tiddler='$:/settings/OokTech/LibraryTracker/Library Tracker Settings' $field='show_create_field' $value='true'/>
 	</$button>
 	<$button class='tc-btn-invisible' popup='$:/state/Library Tracker/Add User Defined Field Info'>
 		^^(?)^^
@@ -45,7 +45,7 @@ $:/settings/inmysocks/Custom Field/$(CustomFieldDisplayName)$
 		</div>
 	</$reveal>
 </$reveal>
-<$reveal type='match' state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_create_field' text='true'>
+<$reveal type='match' state='$:/settings/OokTech/LibraryTracker/Library Tracker Settings!!show_create_field' text='true'>
 	Display Name:
 	<$button class='tc-btn-invisible' popup='$:/state/Library Tracker/Display Name Info'>
 		^^(?)^^
@@ -95,7 +95,7 @@ $:/settings/inmysocks/Custom Field/$(CustomFieldDisplayName)$
 	</$reveal>
 	<$button>
 		Done
-		<$action-setfield $tiddler='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings' $field='show_create_field' $value='false'/>
+		<$action-setfield $tiddler='$:/settings/OokTech/LibraryTracker/Library Tracker Settings' $field='show_create_field' $value='false'/>
 		<$action-setfield $tiddler='$:/state/Library Tracker' $field='display_name_temp' $value=''/>
 		<$action-setfield $tiddler='$:/state/Library Tracker' $field='field_name_temp' $value=''/>
 	</$button>
@@ -109,39 +109,39 @@ $:/settings/inmysocks/Custom Field/$(CustomFieldDisplayName)$
 	</$reveal>
 </$reveal>
 
-<$checkbox tiddler='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings' field='show_type' checked=true unchecked=false default='true'>Show Item Type</$checkbox><br>
-<$checkbox tiddler='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings' field='show_author' checked=true unchecked=false default='true'>Show Author</$checkbox><br>
-<$checkbox tiddler='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings' field='show_series' checked=true unchecked=false default='true'>Show Series</$checkbox><br>
-<$checkbox tiddler='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings' field='show_genre' checked=true unchecked=false default='true'>Show Genre</$checkbox><br>
-<$checkbox tiddler='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings' field='show_location' checked=true unchecked=false default='true'>Show Location</$checkbox><br>
-<$checkbox tiddler='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings' field='show_owner' checked=true unchecked=false default='true'>Show Owner</$checkbox><br>
-<$checkbox tiddler='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings' field='show_tags' checked=true unchecked=false default='true'>Show Tags</$checkbox><br>
-<$checkbox tiddler='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings' field='show_isbn' checked=true unchecked=false default='true'>Show ISBN</$checkbox><br>
-<$list filter='[is[system]prefix[$:/settings/inmysocks/Custom Field/]]'>
-	<$checkbox tiddler='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings' field={{!!field_name}} checked=true unchecked=false default='true'>Show {{!!display_name}}</$checkbox><br>
+<$checkbox tiddler='$:/settings/OokTech/LibraryTracker/Library Tracker Settings' field='show_type' checked=true unchecked=false default='true'>Show Item Type</$checkbox><br>
+<$checkbox tiddler='$:/settings/OokTech/LibraryTracker/Library Tracker Settings' field='show_author' checked=true unchecked=false default='true'>Show Author</$checkbox><br>
+<$checkbox tiddler='$:/settings/OokTech/LibraryTracker/Library Tracker Settings' field='show_series' checked=true unchecked=false default='true'>Show Series</$checkbox><br>
+<$checkbox tiddler='$:/settings/OokTech/LibraryTracker/Library Tracker Settings' field='show_genre' checked=true unchecked=false default='true'>Show Genre</$checkbox><br>
+<$checkbox tiddler='$:/settings/OokTech/LibraryTracker/Library Tracker Settings' field='show_location' checked=true unchecked=false default='true'>Show Location</$checkbox><br>
+<$checkbox tiddler='$:/settings/OokTech/LibraryTracker/Library Tracker Settings' field='show_owner' checked=true unchecked=false default='true'>Show Owner</$checkbox><br>
+<$checkbox tiddler='$:/settings/OokTech/LibraryTracker/Library Tracker Settings' field='show_tags' checked=true unchecked=false default='true'>Show Tags</$checkbox><br>
+<$checkbox tiddler='$:/settings/OokTech/LibraryTracker/Library Tracker Settings' field='show_isbn' checked=true unchecked=false default='true'>Show ISBN</$checkbox><br>
+<$list filter='[is[system]prefix[$:/settings/OokTech/Custom Field/]]'>
+	<$checkbox tiddler='$:/settings/OokTech/LibraryTracker/Library Tracker Settings' field={{!!field_name}} checked=true unchecked=false default='true'>Show {{!!display_name}}</$checkbox><br>
 </$list>
 
 !!Edit Author List
-<$set name=AuthorToRemove value={{$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!edit_author_list}}>
+<$set name=AuthorToRemove value={{$:/settings/OokTech/LibraryTracker/Library Tracker Settings!!edit_author_list}}>
 <<thisRemoveAuthor>>
 </$set>
 
 !!Edit Series List
-<$set name=SeriesToRemove value={{$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!edit_series_list}}>
+<$set name=SeriesToRemove value={{$:/settings/OokTech/LibraryTracker/Library Tracker Settings!!edit_series_list}}>
 <<thisRemoveSeries>>
 </$set>
 
 !!Edit Genre List
-<$set name=GenreToRemove value={{$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!edit_genre_list}}>
+<$set name=GenreToRemove value={{$:/settings/OokTech/LibraryTracker/Library Tracker Settings!!edit_genre_list}}>
 <<thisRemoveGenre>>
 </$set>
 
 !!Edit Location List
-<$set name=LocationToRemove value={{$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!edit_location_list}}>
+<$set name=LocationToRemove value={{$:/settings/OokTech/LibraryTracker/Library Tracker Settings!!edit_location_list}}>
 <<thisRemoveLocation>>
 </$set>
 
 !!Edit Tag List
-<$set name=TagToRemove value={{$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!edit_tag_list}}>
+<$set name=TagToRemove value={{$:/settings/OokTech/LibraryTracker/Library Tracker Settings!!edit_tag_list}}>
 <<thisRemoveTag>>
 </$set>

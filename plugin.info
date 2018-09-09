@@ -1,9 +1,10 @@
 {
-	"title": "$:/plugins/inmysocks/LibraryTracker",
-	"description": "A library tracker for TiddlyWiki",
-	"author": "inmysocks",
-	"version": "0.1.21",
-	"core-version": ">=5.1.8",
-	"source": "https://github.com/inmysocks/TW5-NoLearningRequired-Full",
-	"plugin-type": "plugin"
+  "title": "$:/plugins/OokTech/LibraryTracker",
+  "description": "A library tracker for TiddlyWiki",
+  "author": "inmysocks",
+  "version": "0.2.0",
+  "core-version": ">=5.1.8",
+  "source": "https://github.com/OokTech/TW5-LibraryTracker",
+  "plugin-type": "plugin",
+  "list": "readme"
 }

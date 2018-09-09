@@ -1,5 +1,5 @@
 caption: Book List
-title: $:/plugins/inmysocks/LibraryTracker/Book List
+title: $:/plugins/OokTech/LibraryTracker/Book List
 
 \define thisInnerBookList()
 <tr>
@@ -8,28 +8,28 @@ title: $:/plugins/inmysocks/LibraryTracker/Book List
 			<$view tiddler=<<CurrentBook>> field='title'/>
 		</$link>
 	</td>
-	<$reveal type='nomatch' state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_type' text=false tag=td>
+	<$reveal type='nomatch' state='$:/settings/OokTech/LibraryTracker/Library Tracker Settings!!show_type' text=false tag=td>
 		<$view tiddler="""$(CurrentBook)$""" field='item_type'/>
 	</$reveal>
-	<$reveal type='nomatch' state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_author' text=false tag=td>
+	<$reveal type='nomatch' state='$:/settings/OokTech/LibraryTracker/Library Tracker Settings!!show_author' text=false tag=td>
 		<$view tiddler="""$(CurrentBook)$""" field='author'/>
 	</$reveal>
-	<$reveal type='nomatch' state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_location' text=false tag=td>
+	<$reveal type='nomatch' state='$:/settings/OokTech/LibraryTracker/Library Tracker Settings!!show_location' text=false tag=td>
 		<<thisSetLocation>>
 	</$reveal>
-	<$reveal type='nomatch' state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_owner' text=false tag=td>
+	<$reveal type='nomatch' state='$:/settings/OokTech/LibraryTracker/Library Tracker Settings!!show_owner' text=false tag=td>
 		<$view tiddler="""$(CurrentBook)$""" field='owner'/>
 	</$reveal>
-	<$reveal type='nomatch' state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_series' text=false tag=td>
+	<$reveal type='nomatch' state='$:/settings/OokTech/LibraryTracker/Library Tracker Settings!!show_series' text=false tag=td>
 		<$view tiddler="""$(CurrentBook)$""" field='series'/>
 	</$reveal>
-	<$reveal type='nomatch' state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_genre' text=false tag=td>
+	<$reveal type='nomatch' state='$:/settings/OokTech/LibraryTracker/Library Tracker Settings!!show_genre' text=false tag=td>
 		<$view tiddler="""$(CurrentBook)$""" field='genre'/>
 	</$reveal>
-	<$reveal type='nomatch' state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_isbn' text=false tag=td>
+	<$reveal type='nomatch' state='$:/settings/OokTech/LibraryTracker/Library Tracker Settings!!show_isbn' text=false tag=td>
 		<$view tiddler="""$(CurrentBook)$""" field='isbn'/>
 	</$reveal>
-	<$list filter='[is[system]prefix[$:/settings/inmysocks/Custom Field/]]'>
+	<$list filter='[is[system]prefix[$:/settings/OokTech/Custom Field/]]'>
 		<$set name=CustomFieldName value={{!!field_name}}>
 			<$reveal type=nomatch text=false state=<<thisMakeCustomFieldDisplayState>> tag=td>
 				<$view tiddler=<<CurrentBook>> field={{!!field_name}}/>
@@ -40,13 +40,13 @@ title: $:/plugins/inmysocks/LibraryTracker/Book List
 \end
 
 \define thisBookList()
-<$list filter='[tag[Book]$(SelectedFilterPart)$sort[$(sortType)$]regexp:$(searchField)$[(?i)$(thisSearch)$]]+[limit{$:/settings/inmysocks/LibraryTracker/Library Tracker Settings/Limit!!limit}]' variable=CurrentBook>
+<$list filter='[tag[Book]$(SelectedFilterPart)$sort[$(sortType)$]regexp:$(searchField)$[(?i)$(thisSearch)$]]+[limit{$:/settings/OokTech/LibraryTracker/Library Tracker Settings/Limit!!limit}]' variable=CurrentBook>
 	<<thisInnerBookList>>
 </$list>
 \end
 
 \define thisBookList2()
-<$list filter='[tag[Book]sort[$(sortType)$]regexp:$(searchField)$[(?i)$(thisSearch)$]]+[limit{$:/settings/inmysocks/LibraryTracker/Library Tracker Settings/Limit!!limit}]' variable=CurrentBook>
+<$list filter='[tag[Book]sort[$(sortType)$]regexp:$(searchField)$[(?i)$(thisSearch)$]]+[limit{$:/settings/OokTech/LibraryTracker/Library Tracker Settings/Limit!!limit}]' variable=CurrentBook>
 	<<thisInnerBookList>>
 </$list>
 \end
@@ -163,32 +163,32 @@ $(sortType)$[$(SelectedType)$]
 	<option value='title'>
 		Title
 	</option>
-	<$list filter='[[$:/settings/inmysocks/LibraryTracker/Library Tracker Settings]!show_author[false]]'>
+	<$list filter='[[$:/settings/OokTech/LibraryTracker/Library Tracker Settings]!show_author[false]]'>
 		<option value='author'>
 			Author
 		</option>
 	</$list>
-	<$list filter='[[$:/settings/inmysocks/LibraryTracker/Library Tracker Settings]!show_genre[false]]'>
+	<$list filter='[[$:/settings/OokTech/LibraryTracker/Library Tracker Settings]!show_genre[false]]'>
 		<option value='genre'>
 			Genre
 		</option>
 	</$list>
-	<$list filter='[[$:/settings/inmysocks/LibraryTracker/Library Tracker Settings]!show_series[false]]'>
+	<$list filter='[[$:/settings/OokTech/LibraryTracker/Library Tracker Settings]!show_series[false]]'>
 		<option value='series'>
 			Series
 		</option>
 	</$list>
-	<$list filter='[[$:/settings/inmysocks/LibraryTracker/Library Tracker Settings]!show_location[false]]'>
+	<$list filter='[[$:/settings/OokTech/LibraryTracker/Library Tracker Settings]!show_location[false]]'>
 		<option value=location>
 			Location
 		</option>
 	</$list>
-	<$list filter='[[$:/settings/inmysocks/LibraryTracker/Library Tracker Settings]!show_type[false]]'>
+	<$list filter='[[$:/settings/OokTech/LibraryTracker/Library Tracker Settings]!show_type[false]]'>
 		<option value=item_type>
 			Item Type
 		</option>
 	</$list>
-	<$list filter='[[$:/settings/inmysocks/LibraryTracker/Library Tracker Settings]!show_owner[false]]'>
+	<$list filter='[[$:/settings/OokTech/LibraryTracker/Library Tracker Settings]!show_owner[false]]'>
 		<option value=owner>
 			Owner
 		</option>
@@ -204,32 +204,32 @@ $(sortType)$[$(SelectedType)$]
 	<option value='title'>
 		Title
 	</option>
-	<$list filter='[[$:/settings/inmysocks/LibraryTracker/Library Tracker Settings]!show_author[false]]'>
+	<$list filter='[[$:/settings/OokTech/LibraryTracker/Library Tracker Settings]!show_author[false]]'>
 		<option value='author'>
 			Author
 		</option>
 	</$list>
-	<$list filter='[[$:/settings/inmysocks/LibraryTracker/Library Tracker Settings]!show_genre[false]]'>
+	<$list filter='[[$:/settings/OokTech/LibraryTracker/Library Tracker Settings]!show_genre[false]]'>
 		<option value='genre'>
 			Genre
 		</option>
 	</$list>
-	<$list filter='[[$:/settings/inmysocks/LibraryTracker/Library Tracker Settings]!show_series[false]]'>
+	<$list filter='[[$:/settings/OokTech/LibraryTracker/Library Tracker Settings]!show_series[false]]'>
 		<option value='series'>
 			Series
 		</option>
 	</$list>
-	<$list filter='[[$:/settings/inmysocks/LibraryTracker/Library Tracker Settings]!show_location[false]]'>
+	<$list filter='[[$:/settings/OokTech/LibraryTracker/Library Tracker Settings]!show_location[false]]'>
 		<option value=location>
 			Location
 		</option>
 	</$list>
-	<$list filter='[[$:/settings/inmysocks/LibraryTracker/Library Tracker Settings]!show_type[false]]'>
+	<$list filter='[[$:/settings/OokTech/LibraryTracker/Library Tracker Settings]!show_type[false]]'>
 		<option value=item_type>
 			Item Type
 		</option>
 	</$list>
-	<$list filter='[[$:/settings/inmysocks/LibraryTracker/Library Tracker Settings]!show_owner[false]]'>
+	<$list filter='[[$:/settings/OokTech/LibraryTracker/Library Tracker Settings]!show_owner[false]]'>
 		<option value=owner>
 			Owner
 		</option>
@@ -242,28 +242,28 @@ $(sortType)$[$(SelectedType)$]
 	<th>
 		Title
 	</th>
-	<$reveal type='nomatch' state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_type' text=false tag=th>
+	<$reveal type='nomatch' state='$:/settings/OokTech/LibraryTracker/Library Tracker Settings!!show_type' text=false tag=th>
 		Type
 	</$reveal>
-	<$reveal type='nomatch' state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_author' text=false tag=th>
+	<$reveal type='nomatch' state='$:/settings/OokTech/LibraryTracker/Library Tracker Settings!!show_author' text=false tag=th>
 		Author
 	</$reveal>
-	<$reveal type='nomatch' state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_location' text=false tag=th>
+	<$reveal type='nomatch' state='$:/settings/OokTech/LibraryTracker/Library Tracker Settings!!show_location' text=false tag=th>
 		Location
 	</$reveal>
-	<$reveal type='nomatch' state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_owner' text=false tag=th>
+	<$reveal type='nomatch' state='$:/settings/OokTech/LibraryTracker/Library Tracker Settings!!show_owner' text=false tag=th>
 		Owner
 	</$reveal>
-	<$reveal type='nomatch' state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_series' text=false tag=th>
+	<$reveal type='nomatch' state='$:/settings/OokTech/LibraryTracker/Library Tracker Settings!!show_series' text=false tag=th>
 		Series
 	</$reveal>
-	<$reveal type='nomatch' state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_genre' text=false tag=th>
+	<$reveal type='nomatch' state='$:/settings/OokTech/LibraryTracker/Library Tracker Settings!!show_genre' text=false tag=th>
 		Genre
 	</$reveal>
-	<$reveal type='nomatch' state='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!show_isbn' text=false tag=th>
+	<$reveal type='nomatch' state='$:/settings/OokTech/LibraryTracker/Library Tracker Settings!!show_isbn' text=false tag=th>
 		ISBN
 	</$reveal>
-	<$list filter='[is[system]prefix[$:/settings/inmysocks/Custom Field/]]'>
+	<$list filter='[is[system]prefix[$:/settings/OokTech/Custom Field/]]'>
 		<$set name=CustomFieldName value={{!!field_name}}>
 			<$reveal type=nomatch text=false state=<<thisMakeCustomFieldDisplayState>> tag=th>
 				<$view field=display_name/>
@@ -274,7 +274,7 @@ $(sortType)$[$(SelectedType)$]
 \end
 
 \define thisMakeCustomFieldDisplayState()
-$:/settings/inmysocks/LibraryTracker/Library Tracker Settings!!$(CustomFieldName)$
+$:/settings/OokTech/LibraryTracker/Library Tracker Settings!!$(CustomFieldName)$
 \end
 
 If you select an author/series/location/genre from the drop down menu, then change the `Sort by` option you will have to select from the second dropdown menu again to get it to display things. Despite it showing `all` when you change the sort by option it keeps the previous value, which is invalid now. If I can get a select widget to active action widgets, or to change multiple fields at the same time than I can fix this.
@@ -283,7 +283,7 @@ If you click on the location of a book it will allow you to change the books loc
 
 |Sort by |<<thisSortBySelect>>|<<thisSelectThing>>|
 |Search by |<<thisSearchBySelect>>|<$edit-text tiddler='$:/state/newbook' field='search_text' placeholder='Search'/>|
-|Limit |<$edit-text tiddler='$:/settings/inmysocks/LibraryTracker/Library Tracker Settings/Limit' field='limit'/>| |
+|Limit |<$edit-text tiddler='$:/settings/OokTech/LibraryTracker/Library Tracker Settings/Limit' field='limit'/>| |
 
 <$vars
   sortType={{$:/state/newbook!!sort}}
